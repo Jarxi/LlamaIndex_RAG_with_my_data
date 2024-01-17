@@ -26,11 +26,12 @@ store = MongoDBAtlasVectorSearch(
     collection_name=os.getenv('MONGODB_VECTORS'), # this is where your embeddings were stored in 2_load_and_index.py
     index_name=os.getenv('MONGODB_VECTOR_INDEX') # this is the name of the index you created after loading your data
 )
+
 index = VectorStoreIndex.from_vector_store(store)
 
 # query your data!
 # here we have customized the number of documents returned per query to 20, because tweets are really short
 query_engine = index.as_query_engine(similarity_top_k=20)
-response = query_engine.query("What does the author think of web frameworks?")
+response = query_engine.query("Can you recommend a crossiant provided by blue bottle?")
 print(response)
 
